@@ -125,10 +125,10 @@ class SetFrameRange(Application):
 
     def get_current_frame_range(self, engine):
         try:
-            result = self.execute_hook("hook_frame_operation",
-                                       operation="get_frame_range")     
-        except tank.TankError, e:
-            # deliberately filter out exception that used to be thrown 
+            result = self.execute_hook_method("hook_frame_operation",
+                                       "get_frame_range")
+        except tank.TankError as e:
+            # deliberately filter out exception that used to be thrown
             # from the scene operation hook but has since been removed
             if not str(e).startswith("Not supported frame operation '"):
                 # just re-raise the exception:
@@ -141,12 +141,12 @@ class SetFrameRange(Application):
 
     def set_frame_range(self, engine, in_frame, out_frame):
         try:
-            result = self.execute_hook("hook_frame_operation",
-                                       operation="set_frame_range",
+            result = self.execute_hook_method("hook_frame_operation",
+                                       "set_frame_range",
                                        in_frame=in_frame,
-                                       out_frame=out_frame)     
-        except tank.TankError, e:
-            # deliberately filter out exception that used to be thrown 
+                                       out_frame=out_frame)
+        except tank.TankError as e:
+            # deliberately filter out exception that used to be thrown
             # from the scene operation hook but has since been removed
             if not str(e).startswith("Not supported frame operation '"):
                 # just re-raise the exception:
